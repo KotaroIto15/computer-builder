@@ -1,0 +1,21 @@
+.select-box {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.slide-in {
+    animation: slideIn 3s;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(180px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+    }
+    40%, 100% {
+        opacity: 1;
+    }
+}

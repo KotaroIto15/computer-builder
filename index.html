@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" 
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+    <title>Computer Builder</title>
+</head>
+<body>
+
+    <header class="p-3 bg-danger">
+        <h1 class="title text-center text-light fw-bold">Computer Builder</h1>
+    </header>
+
+    <div id="cpu-select" class="col-12 select-box" data-next = "gpu-select">
+        <h3 class="text-center ">Select CPU</h3>
+        <div class="d-flex justify-content-center">
+            <div class="dropdown m-2">
+                <span>Brand</span>
+                <button id="cpu-brand-btn" class="btn btn-outline-secondary dropdown-toggle mx-1" 
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Brand
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'brand', 'model', 'Intel')">Intel</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'brand', 'model', 'AMD')">AMD</a></li>
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Model</span>
+                <button id="cpu-model-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Model
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'model', null, 'selected')">Please select brand first</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="gpu-select" class="col-12 select-box d-none" data-next="memory-select">
+        <h3 class="text-center ">Select GPU</h3>
+        <div class="d-flex justify-content-center">
+            <div class="dropdown m-2">
+                <span>Brand</span>
+                <button id="gpu-brand-btn" class="btn btn-outline-secondary dropdown-toggle mx-1" 
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Brand
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Nvidia')">Nvidia</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'AMD')">AMD</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Zotac')">Zotac</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Asus')">Asus</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'MSI')">MSI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Gigabyte')">Gigabyte</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'EVGA')">EVGA</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Sapphire')">Sapphire</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PowerColor')">PowerColor</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'XFX')">XFX</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'ASRock')">ASRock</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Gainward')">Gainward</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PNY')">PNY</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PwrHis')">PwrHis</a></li>
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Model</span>
+                <button id="gpu-model-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Model
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'model', null, 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="memory-select" class="col-12 select-box d-none" data-next="storage-select">
+        <h3 class="text-center ">Select Memory Card</h3>
+        <div class="d-flex justify-content-center">
+            <div class="dropdown m-2">
+                <span>Slots</span>
+                <button id="memory-slots-btn" class="btn btn-outline-secondary dropdown-toggle mx-1" 
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select # of Slots
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'slots', 'brand', '1')">1</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'slots', 'brand', '2')">2</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'slots', 'brand', '3')">3</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'slots', 'brand', '4')">4</a></li>
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Brand</span>
+                <button id="memory-brand-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Brand
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'brand', 'model', 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Brand</span>
+                <button id="memory-model-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Model
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('memory', 'model', null, 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="storage-select" class="col-12 select-box d-none" data-next="results">
+        <h3 class="text-center ">Select Storage</h3>
+        <div class="d-flex justify-content-center">
+            <div class="dropdown m-2">
+                <span>HDD/SSD</span>
+                <button id="storage-hdd-ssd-btn" class="btn btn-outline-secondary dropdown-toggle mx-1" 
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select HDD/SSD
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'hdd-ssd', 'size', 'HDD')">HDD</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'hdd-ssd', 'size', 'SSD')">SSD</a></li>
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Size</span>
+                <button id="storage-size-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Storage Size
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'size', 'brand', 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Brand</span>
+                <button id="storage-brand-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Brand
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'brand', 'model', 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+            <div class="dropdown m-2">
+                <span>Size</span>
+                <button id="storage-model-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Model
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'model', null, 'selected')">---</a></li>
+                    <!-- some items depending on the selected brand -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button id="simulate" class="btn btn-primary">TRY</button>
+
+    <div id="result">
+
+    </div> -->
+    
+    <script src="main.js" async></script>
+</body>
+</html>
