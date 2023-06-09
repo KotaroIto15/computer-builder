@@ -30,8 +30,8 @@
                 Select Brand
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'brand', 'model', 'Intel')">Intel</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'brand', 'model', 'AMD')">AMD</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'Brand', 'Model', 'Intel')">Intel</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'Brand', 'Model', 'AMD')">AMD</a></li>
                 </ul>
             </div>
             <div class="dropdown m-2">
@@ -40,8 +40,8 @@
                 type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Model
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'model', null, 'selected')">Please select brand first</a></li>
+                <ul id="cpu-model-items" class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('cpu', 'Model', null, 'selected')">Please select brand first</a></li>
                     <!-- some items depending on the selected brand -->
                 </ul>
             </div>
@@ -58,20 +58,20 @@
                 Select Brand
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Nvidia')">Nvidia</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'AMD')">AMD</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Zotac')">Zotac</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Asus')">Asus</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'MSI')">MSI</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Gigabyte')">Gigabyte</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'EVGA')">EVGA</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Sapphire')">Sapphire</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PowerColor')">PowerColor</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'XFX')">XFX</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'ASRock')">ASRock</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'Gainward')">Gainward</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PNY')">PNY</a></li>
-                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'brand', 'model', 'PwrHis')">PwrHis</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Nvidia')">Nvidia</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'AMD')">AMD</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Zotac')">Zotac</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Asus')">Asus</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'MSI')">MSI</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Gigabyte')">Gigabyte</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'EVGA')">EVGA</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Sapphire')">Sapphire</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'PowerColor')">PowerColor</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'XFX')">XFX</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'ASRock')">ASRock</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'Gainward')">Gainward</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'PNY')">PNY</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'Brand', 'Model', 'PwrHis')">PwrHis</a></li>
                 </ul>
             </div>
             <div class="dropdown m-2">
@@ -80,7 +80,7 @@
                 type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Model
                 </button>
-                <ul class="dropdown-menu">
+                <ul id="gpu-model-items" class="dropdown-menu">
                     <li><a class="dropdown-item" href="#" onclick="handleDropdown('gpu', 'model', null, 'selected')">---</a></li>
                     <!-- some items depending on the selected brand -->
                 </ul>
@@ -166,7 +166,7 @@
                 </ul>
             </div>
             <div class="dropdown m-2">
-                <span>Size</span>
+                <span>Model</span>
                 <button id="storage-model-btn" class="btn btn-outline-secondary dropdown-toggle mx-1"
                 type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Model
@@ -175,6 +175,41 @@
                     <li><a class="dropdown-item" href="#" onclick="handleDropdown('storage', 'model', null, 'selected')">---</a></li>
                     <!-- some items depending on the selected brand -->
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="col-12 d-flex justify-content-between d-none">
+        <div class="d-flex ms-4 col-6 jutify-content-center">
+            <table class="table table-primary table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">CPU</th>
+                        <td>---</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">GPU</th>
+                        <td>---</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Memory Card</th>
+                        <td>---</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Storage</th>
+                        <td>---</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mx-4 col-6 d-flex justify-content-evenly align-items-center">
+            <div>
+                <h3 class="text-center fw-bold">Gaming</h3>
+                <h2 class="text-center">88%</h2>
+            </div>
+            <div>
+                <h3 class="text-center fw-bold">Work</h3>
+                <h2 class="text-center">100%</h2>
             </div>
         </div>
     </div>

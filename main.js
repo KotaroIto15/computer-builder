@@ -2,18 +2,18 @@ const config =
 {
     "url": "https://api.recursionist.io/builder/computers",
     "btnId": "simulate",
-    "target": "result"
+    "target": "result",
 };
 
 let states =
 {
     "gpu": {
-        "brand": false,
-        "model": false,
+        "Brand": false,
+        "Model": false,
     },
     "cpu": {
-        "brand": false,
-        "model": false,
+        "Brand": false,
+        "Model": false,
     },
     "memory": {
         "slots": false,
@@ -21,21 +21,12 @@ let states =
         "model": false,
     },
     "storage": {
-        "hdd-sdd": false,
+        "hdd-ssd": false,
         "size": false,
         "brand": false,
         "model": false,
     },
 }
-
-let btn = document.getElementById(config.btnId);
-btn.addEventListener("click", function() {
-    let newUrl = config.url + '?type=gpu';
-    fetch(newUrl)
-    .then(res => res.json())
-    .then(data => document.getElementById(config.target).innerHTML = JSON.stringify(data));
-});
-
 
 /**
  * 
@@ -46,17 +37,18 @@ btn.addEventListener("click", function() {
  * EFFECTS: called when a dropdown item is selected, overwriting the text in the button to the value of an item. 
  */
 function handleDropdown(component, type, next, value) {
-    let btnName = component + '-' + type + "-btn";
+    let btnName = component + '-' + type.toLowerCase() + "-btn";
     let btn = document.getElementById(btnName);
     btn.innerHTML = value;
     states[component][type] = true;
 
-    if (next) {
-        generateDropdown(component, type, next);
+    if (next != null) {
+        generateDropdown(component, type, next, value);
     }
 
     if (isSelected(component)) {
         let current = document.getElementById(component + "-select");
+        console.log(current.dataset.next);
         let next = document.getElementById(current.dataset.next);
         next.classList.remove("d-none");
         next.classList.add("slide-in");
@@ -64,8 +56,49 @@ function handleDropdown(component, type, next, value) {
     }
 }
 
-function generateDropdown(component, type, next) {
-    console.log("made it here");
+// 1. fetch data
+// 2. filter data
+// 3. render dropdown based on the data
+function generateDropdown(component, type, next, value) {
+    let newUrl = config.url + "?type=" + component;
+    fetch(newUrl)
+    .then(res=>res.json())
+    .then((data)=> {
+        console.log(data);
+        let filteredData = filterData(data, type, value);
+        console.log(filteredData);
+        renderDropdown(filteredData, component, next);
+    });
+}
+
+function filterData(data, type, value) {
+    let res = [];
+    for (obj of data) {
+        if(obj[type] == value) res.push(obj);
+    }
+
+    return res;
+}
+
+function renderDropdown(data, component, type) {
+    let parentName = component + "-" + type.toLowerCase() + "-items";
+    let target = document.getElementById(parentName);
+    target.innerHTML = "";
+
+    for (obj of data) {
+        target.append(generateItem(obj, component, type))
+    }
+}
+
+function generateItem(obj, component, type) {
+    let value = obj[type];
+    let elm = document.createElement("li");
+    elm.innerHTML = 
+    `
+        <a class="dropdown-item" href="#" onClick="handleDropdown('${component}', '${type}', null, '${value}')">${value}</a>
+    `;
+
+    return elm;
 }
 
 function isSelected(component) {
