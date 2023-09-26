@@ -8,7 +8,7 @@ const config =
 let states =
 {
     "gpu": {
-        "Brand": false,
+        "Brand": true,
         "Model": false,
     },
     "cpu": {
